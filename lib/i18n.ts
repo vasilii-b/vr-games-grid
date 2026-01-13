@@ -1,0 +1,32 @@
+export type Lang = "ro" | "ru";
+
+export const labels = {
+    ro: {
+        title: "Jocuri VR",
+        subtitle: "Alege un joc, apasă pe imagine și pornește trailerul.",
+        searchPlaceholder: "Caută după nume…",
+        filters: "Filtre",
+        all: "Toate 🗂️",
+        kids: "Copii 🧒",
+        shooters: "Shootere 🔫",
+        horror: "Horror 👻",
+        cars: "Mașini 🚗",
+        pegi: "PEGI",
+        noResults: "Niciun joc găsit.",
+        close: "Închide"
+    },
+    ru: {
+        title: "VR Игры",
+        subtitle: "Выберите игру, нажмите на изображение и смотрите трейлер.",
+        searchPlaceholder: "Поиск по названию…",
+        filters: "Фильтры",
+        all: "Все 🗂️",
+        kids: "Дети 🧒",
+        shooters: "Шутеры 🔫",
+        horror: "Хоррор 👻",
+        cars: "Машины 🚗",
+        pegi: "PEGI",
+        noResults: "Игры не найдены.",
+        close: "Закрыть"
+    }
+} as const;
