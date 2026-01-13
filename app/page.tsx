@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import gamesData from "@/data/games.json";
 import { Game, Category } from "@/lib/types";
 import { labels, Lang } from "@/lib/i18n";
@@ -18,11 +18,38 @@ const filterKeys: { key: Filter; ro: string; ru: string }[] = [
   { key: "Cars", ro: labels.ro.cars, ru: labels.ru.cars },
 ];
 
+
+// ...existing code...
+
 export default function Page() {
   const games = gamesData as Game[];
 
+
+  // Hydration-safe language state
   const [lang, setLang] = useState<Lang>("ro");
+  const [hydrated, setHydrated] = useState(false);
   const t = labels[lang];
+
+  useEffect(() => {
+    // Only run on client
+    let preferred: Lang = "ro";
+    const stored = window.localStorage.getItem("lang");
+    if (stored === "ro" || stored === "ru") {
+      preferred = stored;
+    } else {
+      const browser = navigator.language || navigator.languages?.[0] || "";
+      if (browser.startsWith("ru")) preferred = "ru";
+    }
+    setLang(preferred);
+    setHydrated(true);
+  }, []);
+
+  // Save language to localStorage when changed (client only)
+  useEffect(() => {
+    if (hydrated) {
+      window.localStorage.setItem("lang", lang);
+    }
+  }, [lang, hydrated]);
 
   const [filter, setFilter] = useState<Filter>(ALL);
   const [query, setQuery] = useState("");
@@ -50,6 +77,8 @@ export default function Page() {
         return g.title.toLowerCase().includes(q);
       });
   }, [games, filter, query]);
+
+  if (!hydrated) return null;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0b0f1f] via-[#11183a] to-[#2a145a] text-white">
