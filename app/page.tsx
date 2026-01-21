@@ -10,12 +10,12 @@ import { GameModal } from "@/components/GameModal";
 const ALL = "ALL" as const;
 type Filter = typeof ALL | Category;
 
-const filterKeys: { key: Filter; ro: string; ru: string }[] = [
-  { key: ALL, ro: labels.ro.all, ru: labels.ru.all },
-  { key: "Kids", ro: labels.ro.kids, ru: labels.ru.kids },
-  { key: "Shooters", ro: labels.ro.shooters, ru: labels.ru.shooters },
-  { key: "Horror", ro: labels.ro.horror, ru: labels.ru.horror },
-  { key: "Cars", ro: labels.ro.cars, ru: labels.ru.cars },
+const filterKeys: { key: Filter; ro: string; ru: string; en: string }[] = [
+  { key: ALL, ro: labels.ro.all, ru: labels.ru.all, en: labels.en.all },
+  { key: "Kids", ro: labels.ro.kids, ru: labels.ru.kids, en: labels.en.kids },
+  { key: "Shooters", ro: labels.ro.shooters, ru: labels.ru.shooters, en: labels.en.shooters },
+  { key: "Horror", ro: labels.ro.horror, ru: labels.ru.horror, en: labels.en.horror },
+  { key: "Cars", ro: labels.ro.cars, ru: labels.ru.cars, en: labels.en.cars },
 ];
 
 
@@ -34,11 +34,12 @@ export default function Page() {
     // Only run on client
     let preferred: Lang = "ro";
     const stored = window.localStorage.getItem("lang");
-    if (stored === "ro" || stored === "ru") {
+    if (stored === "ro" || stored === "ru" || stored === "en") {
       preferred = stored;
     } else {
       const browser = navigator.language || navigator.languages?.[0] || "";
       if (browser.startsWith("ru")) preferred = "ru";
+      else if (browser.startsWith("en")) preferred = "en";
     }
     setLang(preferred);
     setHydrated(true);
@@ -93,12 +94,12 @@ export default function Page() {
           </div>
 
           <button
-            onClick={() => setLang((p) => (p === "ro" ? "ru" : "ro"))}
+            onClick={() => setLang((p) => (p === "ro" ? "ru" : p === "ru" ? "en" : "ro"))}
             className="rounded-2xl px-4 py-2 font-semibold bg-white/10 hover:bg-white/15 border border-white/10 flex items-center gap-2"
             aria-label="Toggle language"
           >
-            <span>{lang === "ro" ? "🇷🇴" : "🇷🇺"}</span>
-            {lang === "ro" ? "RO" : "RU"}
+            <span>{lang === "ro" ? "🇷🇴" : lang === "ru" ? "🇷🇺" : "🇬🇧"}</span>
+            {lang === "ro" ? "RO" : lang === "ru" ? "RU" : "EN"}
           </button>
         </div>
 
@@ -113,7 +114,7 @@ export default function Page() {
 
                 <div className="flex flex-wrap gap-2">
                   {filterKeys.map((f) => {
-                    const label = lang === "ro" ? f.ro : f.ru;
+                    const label = lang === "ro" ? f.ro : lang === "ru" ? f.ru : f.en;
                     const active = filter === f.key;
 
                     return (
