@@ -59,7 +59,7 @@ export function GameCard({
   return (
     <button
       onClick={onClick}
-      className="group text-left rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition overflow-hidden shadow-lg hover:shadow-glow"
+      className="group text-left rounded-2xl bg-black/30 hover:bg-black/50 border border-black/5 hover:border-white/90 transition overflow-hidden shadow-lg hover:shadow-glow"
     >
       <div className="relative aspect-video overflow-hidden">
         <img
