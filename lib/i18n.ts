@@ -1,4 +1,4 @@
-export type Lang = "ro" | "ru";
+export type Lang = "ro" | "ru" | "en";
 
 export const labels = {
     ro: {
@@ -28,5 +28,19 @@ export const labels = {
         pegi: "PEGI",
         noResults: "Игры не найдены.",
         close: "Закрыть"
+    },
+    en: {
+        title: "VR Games",
+        subtitle: "Choose a game, click on the image and watch the trailer.",
+        searchPlaceholder: "Search by name…",
+        filters: "Filters",
+        all: "All 🗂️",
+        kids: "Kids 🧒",
+        shooters: "Shooters 🔫",
+        horror: "Horror 👻",
+        cars: "Cars 🚗",
+        pegi: "PEGI",
+        noResults: "No games found.",
+        close: "Close"
     }
 } as const;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import gamesData from "@/data/games.json";
 import { Game, Category } from "@/lib/types";
 import { labels, Lang } from "@/lib/i18n";
@@ -10,12 +10,12 @@ import { GameModal } from "@/components/GameModal";
 const ALL = "ALL" as const;
 type Filter = typeof ALL | Category;
 
-const filterKeys: { key: Filter; ro: string; ru: string }[] = [
-  { key: ALL, ro: labels.ro.all, ru: labels.ru.all },
-  { key: "Kids", ro: labels.ro.kids, ru: labels.ru.kids },
-  { key: "Shooters", ro: labels.ro.shooters, ru: labels.ru.shooters },
-  { key: "Horror", ro: labels.ro.horror, ru: labels.ru.horror },
-  { key: "Cars", ro: labels.ro.cars, ru: labels.ru.cars },
+const filterKeys: { key: Filter; [key: string]: string }[] = [
+  { key: ALL, ro: labels.ro.all, ru: labels.ru.all, en: labels.en.all },
+  { key: "Kids", ro: labels.ro.kids, ru: labels.ru.kids, en: labels.en.kids },
+  { key: "Shooters", ro: labels.ro.shooters, ru: labels.ru.shooters, en: labels.en.shooters },
+  { key: "Horror", ro: labels.ro.horror, ru: labels.ru.horror, en: labels.en.horror },
+  { key: "Cars", ro: labels.ro.cars, ru: labels.ru.cars, en: labels.en.cars },
 ];
 
 
@@ -28,17 +28,20 @@ export default function Page() {
   // Hydration-safe language state
   const [lang, setLang] = useState<Lang>("ro");
   const [hydrated, setHydrated] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const langMenuRef = useRef<HTMLDivElement>(null);
   const t = labels[lang];
 
   useEffect(() => {
     // Only run on client
     let preferred: Lang = "ro";
     const stored = window.localStorage.getItem("lang");
-    if (stored === "ro" || stored === "ru") {
+    if (stored === "ro" || stored === "ru" || stored === "en") {
       preferred = stored;
     } else {
       const browser = navigator.language || navigator.languages?.[0] || "";
       if (browser.startsWith("ru")) preferred = "ru";
+      else if (browser.startsWith("en")) preferred = "en";
     }
     setLang(preferred);
     setHydrated(true);
@@ -50,6 +53,23 @@ export default function Page() {
       window.localStorage.setItem("lang", lang);
     }
   }, [lang, hydrated]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
+        setLangMenuOpen(false);
+      }
+    };
+
+    if (langMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [langMenuOpen]);
 
   const [filter, setFilter] = useState<Filter>(ALL);
   const [query, setQuery] = useState("");
@@ -92,14 +112,65 @@ export default function Page() {
             <p className="mt-2 text-white/70">{t.subtitle}</p>
           </div>
 
-          <button
-            onClick={() => setLang((p) => (p === "ro" ? "ru" : "ro"))}
-            className="rounded-2xl px-4 py-2 font-semibold bg-white/10 hover:bg-white/15 border border-white/10 flex items-center gap-2"
-            aria-label="Toggle language"
-          >
-            <span>{lang === "ro" ? "🇷🇴" : "🇷🇺"}</span>
-            {lang === "ro" ? "RO" : "RU"}
-          </button>
+          <div className="relative" ref={langMenuRef}>
+            <button
+              onClick={() => setLangMenuOpen(!langMenuOpen)}
+              className="rounded-2xl px-4 py-2 font-semibold bg-white/10 hover:bg-white/15 border border-white/10 flex items-center gap-2"
+              aria-label="Select language"
+            >
+              <span>{lang === "ro" ? "🇷🇴" : lang === "ru" ? "🇷🇺" : "🇬🇧"}</span>
+              {lang === "ro" ? "RO" : lang === "ru" ? "RU" : "EN"}
+              <svg
+                className={`w-4 h-4 transition-transform ${langMenuOpen ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {langMenuOpen && (
+              <div className="absolute top-full right-0 mt-2 rounded-2xl border border-white/10 bg-[#0b0f1f]/95 backdrop-blur-sm overflow-hidden z-10 min-w-[140px]">
+                <button
+                  onClick={() => {
+                    setLang("ro");
+                    setLangMenuOpen(false);
+                  }}
+                  className={`w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition ${
+                    lang === "ro" ? "bg-white/5" : ""
+                  }`}
+                >
+                  <span>🇷🇴</span>
+                  <span className="font-semibold">RO</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setLang("ru");
+                    setLangMenuOpen(false);
+                  }}
+                  className={`w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition ${
+                    lang === "ru" ? "bg-white/5" : ""
+                  }`}
+                >
+                  <span>🇷🇺</span>
+                  <span className="font-semibold">RU</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setLang("en");
+                    setLangMenuOpen(false);
+                  }}
+                  className={`w-full px-4 py-3 flex items-center gap-3 hover:bg-white/10 transition ${
+                    lang === "en" ? "bg-white/5" : ""
+                  }`}
+                >
+                  <span>🇬🇧</span>
+                  <span className="font-semibold">EN</span>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Controls */}
@@ -113,7 +184,7 @@ export default function Page() {
 
                 <div className="flex flex-wrap gap-2">
                   {filterKeys.map((f) => {
-                    const label = lang === "ro" ? f.ro : f.ru;
+                    const label = f[lang];
                     const active = filter === f.key;
 
                     return (
