@@ -5,3 +5,46 @@
 :root {
   color-scheme: dark;
 }
+
+body {
+  background: linear-gradient(
+    45deg,
+    #ff006e,
+    #8338ec,
+    #3a86ff,
+    #06ffa5,
+    #ffbe0b,
+    #ff006e
+  );
+  background-size: 300% 300%;
+  animation: neonGradient 20s ease-in-out infinite;
+  min-height: 100vh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}
+
+@keyframes neonGradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  20% {
+    background-position: 100% 0%;
+  }
+  40% {
+    background-position: 100% 100%;
+  }
+  60% {
+    background-position: 0% 100%;
+  }
+  80% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
