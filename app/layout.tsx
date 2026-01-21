@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code",
+    google: "your-google-verification-code", // TODO: Replace with actual Google Search Console verification code
   },
 };
 
@@ -75,7 +75,7 @@ export default function RootLayout({
               "image": "https://vasilii-b.github.io/vr-games-grid/og-image.jpg",
               "description": "Centru modern de jocuri VR pentru copii și adulți cu o gamă largă de jocuri: adventure, shootere, horror, racing și multe altele. Localizat în Glodeni, Iași.",
               "url": "https://vasilii-b.github.io/vr-games-grid/",
-              "telephone": "+40-xxx-xxx-xxx",
+              "telephone": "+40-xxx-xxx-xxx", // TODO: Replace with actual business phone number
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Glodeni",
@@ -110,7 +110,7 @@ export default function RootLayout({
                 "https://www.instagram.com/playzone_glodeni/",
                 "https://www.tiktok.com/@playzone.glodeni1"
               ],
-              "aggregateRating": {
+              "aggregateRating": { // TODO: Replace with actual ratings from customer reviews
                 "@type": "AggregateRating",
                 "ratingValue": "4.5",
                 "reviewCount": "100"
