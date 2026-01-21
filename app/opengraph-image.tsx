@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
  
 export const runtime = 'edge'
  
-export const alt = 'Play Zone VR Games'
+export const alt = 'PlayZone Glodeni VR Games'
 export const size = {
   width: 1200,
   height: 630,
@@ -34,7 +34,7 @@ export default async function Image() {
             textAlign: 'center',
           }}
         >
-          🎮 Play Zone VR
+          🎮 PlayZone VR
         </div>
         <div
           style={{
@@ -54,7 +54,7 @@ export default async function Image() {
             textAlign: 'center',
           }}
         >
-          📍 Glodeni, Iași, România
+          📍 Glodeni, Republica Moldova
         </div>
       </div>
     ),

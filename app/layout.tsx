@@ -3,25 +3,25 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://vasilii-b.github.io/vr-games-grid'),
-  title: "Play Zone VR Games - Jocuri VR pentru Copii și Adulți | Glodeni, Iași, România",
-  description: "Explorează cele mai bune jocuri VR la Play Zone Glodeni! Jocuri pentru copii, shootere, horror și curse. Teren de joacă VR modern cu trailers și descrieri complete.",
-  keywords: ["VR games", "jocuri VR", "VR Iași", "VR Glodeni", "play zone", "teren de joacă", "copii", "Meta Quest", "realitate virtuală", "VR pentru copii", "jocuri VR România"],
-  authors: [{ name: "Play Zone VR" }],
-  creator: "Play Zone VR",
-  publisher: "Play Zone VR",
+  title: "PlayZone VR Games - Jocuri VR pentru Copii și Adulți | Glodeni, Republica Moldova",
+  description: "Explorează cele mai bune jocuri VR la PlayZone Glodeni! Jocuri pentru copii, shootere, horror și curse. Teren de joacă și VR modern cu cele mai noi jocuri.",
+  keywords: ["VR games", "jocuri VR", "VR Glodeni", "play zone", "teren de joacă", "copii", "Meta Quest", "realitate virtuală", "VR pentru copii", "jocuri VR Republica Moldova", "VR Romania", "shootere VR", "jocuri horror VR", "jocuri curse VR"],
+  authors: [{ name: "PlayZone Glodeni" }],
+  creator: "PlayZone Glodeni",
+  publisher: "PlayZone Glodeni",
   alternates: {
-    canonical: "https://vasilii-b.github.io/vr-games-grid/",
+    canonical: "https://playzone-vr-games.vercel.app/",
     languages: {
-      'ro-RO': 'https://vasilii-b.github.io/vr-games-grid/',
-      'ru-RU': 'https://vasilii-b.github.io/vr-games-grid/',
-      'en-US': 'https://vasilii-b.github.io/vr-games-grid/',
+      'ro-RO': 'https://playzone-vr-games.vercel.app/',
+      'ru-RU': 'https://playzone-vr-games.vercel.app/',
+      'en-US': 'https://playzone-vr-games.vercel.app/',
     },
   },
   openGraph: {
-    title: "Play Zone VR Games - Jocuri VR Glodeni",
-    description: "Explorează cele mai bune jocuri VR la Play Zone Glodeni! Jocuri pentru copii, shootere, horror și curse.",
-    url: "https://vasilii-b.github.io/vr-games-grid/",
-    siteName: "Play Zone VR Games",
+    title: "PlayZone VR Games - Jocuri VR Glodeni",
+    description: "Explorează cele mai bune jocuri VR la PlayZone Glodeni! Jocuri pentru copii, shootere, horror și curse.",
+    url: "https://playzone-vr-games.vercel.app/",
+    siteName: "PlayZone Glodeni VR Games",
     locale: "ro_RO",
     alternateLocale: ["ru_RU", "en_US"],
     type: "website",
@@ -30,14 +30,14 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Play Zone VR Games",
+        alt: "PlayZone Glodeni VR Games",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Play Zone VR Games - Jocuri VR Glodeni",
-    description: "Explorează cele mai bune jocuri VR la Play Zone Glodeni! Jocuri pentru copii, shootere, horror și curse.",
+    title: "PlayZone Glodeni - Jocuri VR pentru Copii și Adulți",
+    description: "Explorează cele mai bune jocuri VR la PlayZone Glodeni! Jocuri pentru copii, shootere, horror și curse.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -70,19 +70,19 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
-              "@id": "https://vasilii-b.github.io/vr-games-grid/",
-              "name": "Play Zone Glodeni - Teren de Joacă VR",
-              "image": "https://vasilii-b.github.io/vr-games-grid/og-image.jpg",
-              "description": "Centru modern de jocuri VR pentru copii și adulți cu o gamă largă de jocuri: adventure, shootere, horror, racing și multe altele. Localizat în Glodeni, Iași.",
-              "url": "https://vasilii-b.github.io/vr-games-grid/",
-              "telephone": "+40-xxx-xxx-xxx",
+              "@id": "https://playzone-vr-games.vercel.app/",
+              "name": "PlayZone Glodeni - Teren de Joacă VR",
+              "image": "https://playzone-vr-games.vercel.app/og-image.jpg",
+              "description": "Centru modern de jocuri VR pentru copii și adulți cu o gamă largă de jocuri: adventure, shootere, horror, racing și multe altele. Localizat în Glodeni, Republica Moldova.",
+              "url": "https://playzone-vr-games.vercel.app/",
+              "telephone": "+373 607 888 41",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Glodeni",
+                "streetAddress": "Ștefan cel Mare, 22",
                 "addressLocality": "Glodeni",
-                "addressRegion": "Iași",
-                "postalCode": "707340",
-                "addressCountry": "RO"
+                "addressRegion": "Glodeni",
+                "postalCode": "2049",
+                "addressCountry": "MD"
               },
               "geo": {
                 "@type": "GeoCoordinates",
@@ -92,13 +92,7 @@ export default function RootLayout({
               "openingHoursSpecification": [
                 {
                   "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                  "opens": "10:00",
-                  "closes": "20:00"
-                },
-                {
-                  "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": ["Saturday", "Sunday"],
+                  "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
                   "opens": "10:00",
                   "closes": "21:00"
                 }
@@ -112,7 +106,7 @@ export default function RootLayout({
               ],
               "aggregateRating": {
                 "@type": "AggregateRating",
-                "ratingValue": "4.5",
+                "ratingValue": "5",
                 "reviewCount": "100"
               },
               "amenityFeature": [

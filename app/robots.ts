@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://vasilii-b.github.io/vr-games-grid/sitemap.xml',
+    sitemap: 'https://playzone-vr-games.vercel.app//sitemap.xml',
   }
 }
