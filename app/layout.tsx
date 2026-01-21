@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { MicrosoftClarity } from "@/components/MicrosoftClarity";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://playzone-vr-games.vercel.app/'),
@@ -125,7 +126,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <MicrosoftClarity />
+        {children}
+      </body>
     </html>
   );
 }
