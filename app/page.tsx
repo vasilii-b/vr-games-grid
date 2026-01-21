@@ -151,7 +151,7 @@ export default function Page() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {filtered.map((g) => (
-                <GameCard key={g.id} game={g} onClick={() => setSelected(g)} />
+                <GameCard key={g.id} game={g} onClick={() => setSelected(g)} lang={lang} />
               ))}
             </div>
           )}
