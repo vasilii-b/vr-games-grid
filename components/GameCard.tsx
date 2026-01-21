@@ -24,7 +24,7 @@ function getYouTubeVideoId(url: string): string | null {
 function getImageUrl(game: Game): string {
   const youtubeId = getYouTubeVideoId(game.videoUrl);
   if (youtubeId) {
-    return `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`;
+    return `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
   }
   return game.imageUrl;
 }
