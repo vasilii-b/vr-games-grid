@@ -23,6 +23,8 @@ export function MicrosoftClarity() {
     }
 
     // Inject Microsoft Clarity script
+    // Using 'any' type for window object is intentional here to match the official Clarity snippet
+    // which dynamically adds properties to the window object
     (function(c: any, l: Document, a: string, r: string, i: string, t?: HTMLScriptElement, y?: Element) {
       c[a] = c[a] || function() {
         (c[a].q = c[a].q || []).push(arguments);
