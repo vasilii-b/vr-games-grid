@@ -13,9 +13,9 @@ type Filter = typeof ALL | Category;
 const filterKeys: { key: Filter; [key: string]: string }[] = [
   { key: ALL, ro: labels.ro.all, ru: labels.ru.all, en: labels.en.all },
   { key: "Kids", ro: labels.ro.kids, ru: labels.ru.kids, en: labels.en.kids },
-  { key: "Shooters", ro: labels.ro.shooters, ru: labels.ru.shooters, en: labels.en.shooters },
+  { key: "Shooter", ro: labels.ro.shooters, ru: labels.ru.shooters, en: labels.en.shooters },
   { key: "Horror", ro: labels.ro.horror, ru: labels.ru.horror, en: labels.en.horror },
-  { key: "Cars", ro: labels.ro.cars, ru: labels.ru.cars, en: labels.en.cars },
+  { key: "Racing", ro: labels.ro.racing, ru: labels.ru.racing, en: labels.en.racing },
 ];
 
 

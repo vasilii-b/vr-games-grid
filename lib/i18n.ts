@@ -10,7 +10,7 @@ export const labels = {
         kids: "Copii 🧒",
         shooters: "Shootere 🔫",
         horror: "Horror 👻",
-        cars: "Mașini 🚗",
+        racing: "Curse 🚗",
         pegi: "PEGI",
         noResults: "Niciun joc găsit.",
         close: "Închide"
@@ -24,7 +24,7 @@ export const labels = {
         kids: "Дети 🧒",
         shooters: "Шутеры 🔫",
         horror: "Хоррор 👻",
-        cars: "Машины 🚗",
+        racing: "Гонки 🚗",
         pegi: "PEGI",
         noResults: "Игры не найдены.",
         close: "Закрыть"
@@ -38,7 +38,7 @@ export const labels = {
         kids: "Kids 🧒",
         shooters: "Shooters 🔫",
         horror: "Horror 👻",
-        cars: "Cars 🚗",
+        racing: "Racing 🚗",
         pegi: "PEGI",
         noResults: "No games found.",
         close: "Close"

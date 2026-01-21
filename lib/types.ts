@@ -1,4 +1,16 @@
-export type Category = "Kids" | "Shooters" | "Horror" | "Cars";
+export type Category =
+  | "Action"
+  | "Adventure"
+  | "Shooter"
+  | "Simulation"
+  | "Kids"
+  | "Horror"
+  | "Fight"
+  | "Zombie"
+  | "Survival"
+  | "Sport"
+  | "Racing"
+  | "Explore";
 
 export type Game = {
   id: string;
