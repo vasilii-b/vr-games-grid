@@ -1,6 +1,34 @@
 import { Game } from "@/lib/types";
 import { Lang } from "@/lib/i18n";
 
+// Extract YouTube video ID from various URL formats
+function getYouTubeVideoId(url: string): string | null {
+  if (!url) return null;
+  
+  // Handle youtu.be format: https://youtu.be/VIDEO_ID
+  const youtuBeMatch = url.match(/youtu\.be\/([^?&]+)/);
+  if (youtuBeMatch) return youtuBeMatch[1];
+  
+  // Handle youtube.com/watch?v=VIDEO_ID format (v parameter can be anywhere in query string)
+  const watchMatch = url.match(/youtube\.com\/watch.*[?&]v=([^&]+)/);
+  if (watchMatch) return watchMatch[1];
+  
+  // Handle youtube.com/embed/VIDEO_ID format
+  const embedMatch = url.match(/youtube\.com\/embed\/([^?&]+)/);
+  if (embedMatch) return embedMatch[1];
+  
+  return null;
+}
+
+// Get the appropriate image URL - use YouTube thumbnail if video is from YouTube
+function getImageUrl(game: Game): string {
+  const youtubeId = getYouTubeVideoId(game.videoUrl);
+  if (youtubeId) {
+    return `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`;
+  }
+  return game.imageUrl;
+}
+
 // PEGI colors based on official guidelines from https://pegi.info/what-do-the-labels-mean
 function getPegiColor(pegi: number): string {
   if (pegi === 3 || pegi === 7) return "bg-green-600";
@@ -35,7 +63,7 @@ export function GameCard({
     >
       <div className="relative aspect-video overflow-hidden">
         <img
-          src={game.imageUrl}
+          src={getImageUrl(game)}
           alt={game.title}
           className="h-full w-full object-cover group-hover:scale-[1.03] transition duration-300"
           loading="lazy"
