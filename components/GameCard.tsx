@@ -1,11 +1,32 @@
 import { Game } from "@/lib/types";
+import { Lang } from "@/lib/i18n";
+
+// PEGI colors based on official guidelines from https://pegi.info/what-do-the-labels-mean
+function getPegiColor(pegi: number): string {
+  if (pegi === 3 || pegi === 7) return "bg-green-600";
+  if (pegi === 12 || pegi === 16) return "bg-orange-500";
+  if (pegi === 18) return "bg-red-600";
+  // Fallback for any unexpected values
+  return "bg-gray-600";
+}
+
+// Get PEGI info link based on language
+function getPegiLink(lang: Lang): string {
+  if (lang === "ro") {
+    return "https://pegi.info/ro/what-do-the-labels-mean";
+  }
+  // RU and other languages use the base URL
+  return "https://pegi.info/what-do-the-labels-mean";
+}
 
 export function GameCard({
   game,
   onClick,
+  lang,
 }: {
   game: Game;
   onClick: () => void;
+  lang: Lang;
 }) {
   return (
     <button
@@ -21,9 +42,15 @@ export function GameCard({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
         <div className="absolute bottom-3 left-3">
-          <span className="inline-flex items-center rounded-full bg-black/60 px-3 py-1 text-xs font-semibold tracking-wide border border-white/10">
+          <a
+            href={getPegiLink(lang)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-wide border border-white/20 hover:border-white/40 transition ${getPegiColor(game.pegi)}`}
+          >
             PEGI {game.pegi}
-          </span>
+          </a>
         </div>
       </div>
 
