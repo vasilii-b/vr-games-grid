@@ -10,7 +10,7 @@ import { GameModal } from "@/components/GameModal";
 const ALL = "ALL" as const;
 type Filter = typeof ALL | Category;
 
-const filterKeys: { key: Filter; ro: string; ru: string; en: string }[] = [
+const filterKeys: { key: Filter; [key: string]: string }[] = [
   { key: ALL, ro: labels.ro.all, ru: labels.ru.all, en: labels.en.all },
   { key: "Kids", ro: labels.ro.kids, ru: labels.ru.kids, en: labels.en.kids },
   { key: "Shooters", ro: labels.ro.shooters, ru: labels.ru.shooters, en: labels.en.shooters },
@@ -114,7 +114,7 @@ export default function Page() {
 
                 <div className="flex flex-wrap gap-2">
                   {filterKeys.map((f) => {
-                    const label = lang === "ro" ? f.ro : lang === "ru" ? f.ru : f.en;
+                    const label = f[lang];
                     const active = filter === f.key;
 
                     return (
