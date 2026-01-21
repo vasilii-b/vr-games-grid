@@ -25,6 +25,13 @@ export default async function Image() {
           fontFamily: 'sans-serif',
         }}
       >
+        <img
+          src={"/playzone.png"}
+          width={160}
+          height={160}
+          style={{ marginBottom: 32, borderRadius: 32, boxShadow: '0 4px 32px #0004' }}
+          alt="PlayZone Glodeni Logo"
+        />
         <div
           style={{
             fontSize: 80,

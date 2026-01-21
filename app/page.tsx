@@ -13,17 +13,30 @@ type Filter = typeof ALL | Category;
 const filterKeys: { key: Filter; [key: string]: string }[] = [
   { key: ALL, ro: labels.ro.all, ru: labels.ru.all, en: labels.en.all },
   { key: "Kids", ro: labels.ro.kids, ru: labels.ru.kids, en: labels.en.kids },
-  { key: "Shooter", ro: labels.ro.shooters, ru: labels.ru.shooters, en: labels.en.shooters },
-  { key: "Horror", ro: labels.ro.horror, ru: labels.ru.horror, en: labels.en.horror },
-  { key: "Racing", ro: labels.ro.racing, ru: labels.ru.racing, en: labels.en.racing },
+  {
+    key: "Shooter",
+    ro: labels.ro.shooters,
+    ru: labels.ru.shooters,
+    en: labels.en.shooters,
+  },
+  {
+    key: "Horror",
+    ro: labels.ro.horror,
+    ru: labels.ru.horror,
+    en: labels.en.horror,
+  },
+  {
+    key: "Racing",
+    ro: labels.ro.racing,
+    ru: labels.ru.racing,
+    en: labels.en.racing,
+  },
 ];
-
 
 // ...existing code...
 
 export default function Page() {
   const games = gamesData as Game[];
-
 
   // Hydration-safe language state
   const [lang, setLang] = useState<Lang>("ro");
@@ -57,7 +70,10 @@ export default function Page() {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
+      if (
+        langMenuRef.current &&
+        !langMenuRef.current.contains(event.target as Node)
+      ) {
         setLangMenuOpen(false);
       }
     };
@@ -104,8 +120,16 @@ export default function Page() {
     <div className="min-h-screen">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
         {/* Header */}
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start justify-between gap-4 flex-wrap sm:flex-nowrap">
           <div>
+            <img
+              src="/playzone.png"
+              alt="Playzone Logo"
+              className="h-20 w-auto mx-auto mb-2 drop-shadow-lg"
+              style={{ maxHeight: 80 }}
+            />
+          </div>
+          <div className="order-3 w-full sm:w-auto sm:order-none">
             <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
               {t.title}
             </h1>
@@ -126,7 +150,12 @@ export default function Page() {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
 
@@ -222,7 +251,12 @@ export default function Page() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {filtered.map((g) => (
-                <GameCard key={g.id} game={g} onClick={() => setSelected(g)} lang={lang} />
+                <GameCard
+                  key={g.id}
+                  game={g}
+                  onClick={() => setSelected(g)}
+                  lang={lang}
+                />
               ))}
             </div>
           )}
