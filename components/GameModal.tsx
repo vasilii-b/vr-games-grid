@@ -48,16 +48,16 @@ export function GameModal({
 
       <div className="relative w-full max-w-3xl rounded-3xl overflow-hidden border border-white/15 bg-[#0b0f1f] shadow-2xl">
         <div className="p-4 sm:p-5 flex items-start justify-between gap-4">
-          <div>
+          <div className="min-w-0 flex-1">
             <div className="text-lg sm:text-xl font-bold">{game.title}</div>
-            <div className="mt-2 flex gap-2 items-center flex-wrap">
-              <span className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10">
+            <div className="mt-2 flex gap-2 items-center overflow-x-auto">
+              <span className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 whitespace-nowrap">
                 {pegiLabel} {game.pegi}
               </span>
               {game.categories.map((c) => (
                 <span
                   key={c}
-                  className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10"
+                  className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 whitespace-nowrap"
                 >
                   {c}
                 </span>
