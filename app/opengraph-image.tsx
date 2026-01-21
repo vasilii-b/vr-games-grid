@@ -34,7 +34,7 @@ export default async function Image() {
             textAlign: 'center',
           }}
         >
-          🎮 PlayZone VR
+          PlayZone Glodeni
         </div>
         <div
           style={{
@@ -54,7 +54,8 @@ export default async function Image() {
             textAlign: 'center',
           }}
         >
-          📍 Glodeni, Republica Moldova
+          📍 Glodeni, Republica Moldova<br/>
+          str. Ștefan cel Mare 22
         </div>
       </div>
     ),
