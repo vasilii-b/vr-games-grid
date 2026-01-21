@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code",
+    google: "your-google-verification-code", // TODO: Replace with actual Google Search Console verification code
   },
 };
 
@@ -104,7 +104,7 @@ export default function RootLayout({
                 "https://www.instagram.com/playzone_glodeni/",
                 "https://www.tiktok.com/@playzone.glodeni1"
               ],
-              "aggregateRating": {
+              "aggregateRating": { // TODO: Replace with actual ratings from customer reviews
                 "@type": "AggregateRating",
                 "ratingValue": "5",
                 "reviewCount": "100"
