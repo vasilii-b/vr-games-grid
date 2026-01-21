@@ -9,8 +9,8 @@ function getYouTubeVideoId(url: string): string | null {
   const youtuBeMatch = url.match(/youtu\.be\/([^?&]+)/);
   if (youtuBeMatch) return youtuBeMatch[1];
   
-  // Handle youtube.com/watch?v=VIDEO_ID format
-  const watchMatch = url.match(/youtube\.com\/watch\?v=([^&]+)/);
+  // Handle youtube.com/watch?v=VIDEO_ID format (v parameter can be anywhere in query string)
+  const watchMatch = url.match(/youtube\.com\/watch.*[?&]v=([^&]+)/);
   if (watchMatch) return watchMatch[1];
   
   // Handle youtube.com/embed/VIDEO_ID format
