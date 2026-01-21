@@ -81,7 +81,7 @@ export default function Page() {
   if (!hydrated) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0b0f1f] via-[#11183a] to-[#2a145a] text-white">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
         {/* Header */}
         <div className="flex items-start justify-between gap-4">
