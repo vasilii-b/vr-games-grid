@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Game } from "@/lib/types";
 import { isMobileDevice } from "@/lib/utils";
 import VideoPlayer from "./VideoPlayer";
@@ -35,11 +35,10 @@ export function GameModal({
   pegiLabel: string;
   closeLabel: string;
 }) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Detect if the device is mobile
-    setIsMobile(isMobileDevice());
+  // Memoize mobile detection to avoid repeated checks
+  const isMobile = useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    return isMobileDevice();
   }, []);
 
   useEffect(() => {
