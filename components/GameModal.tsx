@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Game } from "@/lib/types";
 import VideoPlayer from "./VideoPlayer";
 
@@ -6,12 +6,16 @@ function isYouTube(url: string) {
   return /youtube\.com|youtu\.be/.test(url);
 }
 
-function toYouTubeEmbed(url: string) {
+function toYouTubeEmbed(url: string, isMobile: boolean) {
   // supports youtu.be/<id> or youtube.com/watch?v=<id>
   const short = url.match(/youtu\.be\/([A-Za-z0-9_-]+)/)?.[1];
   const long = url.match(/[?&]v=([A-Za-z0-9_-]+)/)?.[1];
   const id = short || long;
-  return id ? `https://www.youtube.com/embed/${id}` : url;
+  const baseUrl = id ? `https://www.youtube.com/embed/${id}` : url;
+  
+  // On mobile, add playsinline=0 to encourage fullscreen playback
+  const mobileParam = isMobile ? "&playsinline=0" : "";
+  return baseUrl + mobileParam;
 }
 
 export function GameModal({
@@ -25,6 +29,16 @@ export function GameModal({
   pegiLabel: string;
   closeLabel: string;
 }) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Detect if the device is mobile
+    const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+    setIsMobile(mobile);
+  }, []);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -79,7 +93,7 @@ export function GameModal({
               {youtube ? (
                 <iframe
                   className="w-full h-full"
-                  src={toYouTubeEmbed(game.videoUrl) + "?autoplay=1"}
+                  src={toYouTubeEmbed(game.videoUrl, isMobile) + "?autoplay=1"}
                   title={game.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
