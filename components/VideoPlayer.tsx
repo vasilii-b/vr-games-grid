@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useMemo } from "react";
 import { isMobileDevice } from "@/lib/utils";
 
 interface VideoPlayerProps {
@@ -7,13 +7,11 @@ interface VideoPlayerProps {
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
 	const videoRef = useRef<HTMLVideoElement>(null);
+	const isMobile = useMemo(() => isMobileDevice(), []);
 
 	useEffect(() => {
 		const video = videoRef.current;
-		if (!video) return;
-
-		// Detect if the device is mobile
-		if (!isMobileDevice()) return;
+		if (!video || !isMobile) return;
 
 		const requestFullscreen = async () => {
 			try {
@@ -36,7 +34,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
 		return () => {
 			video.removeEventListener("play", requestFullscreen);
 		};
-	}, []);
+	}, [isMobile]);
 
 	return (
 		<video
