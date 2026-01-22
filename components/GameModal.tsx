@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Game } from "@/lib/types";
 import { isMobileDevice } from "@/lib/utils";
 import VideoPlayer from "./VideoPlayer";
@@ -36,10 +36,7 @@ export function GameModal({
   closeLabel: string;
 }) {
   // Memoize mobile detection to avoid repeated checks
-  const isMobile = useMemo(() => {
-    if (typeof window === 'undefined') return false;
-    return isMobileDevice();
-  }, []);
+  const isMobile = useMemo(() => isMobileDevice(), []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
