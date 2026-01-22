@@ -2,3 +2,7 @@
 node_modules
 .DS_Store
 tsconfig.tsbuildinfo
+
+# Environment variables
+.env.local
+.env*.local
