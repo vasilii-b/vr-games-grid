@@ -23,7 +23,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
 					(video as any).webkitEnterFullscreen();
 				}
 			} catch (error) {
-				// Silently fail if fullscreen is not available or denied
+				// Log error but don't interrupt user experience
 				console.log("Fullscreen request failed:", error);
 			}
 		};
