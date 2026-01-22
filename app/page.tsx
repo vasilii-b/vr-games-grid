@@ -95,18 +95,9 @@ export default function Page() {
   useEffect(() => {
     if (!hydrated) return;
 
-    // Open game from URL hash on page load
-    const hash = window.location.hash.slice(1); // Remove the '#'
-    if (hash) {
-      const game = games.find((g) => g.id === hash);
-      if (game) {
-        setSelected(game);
-      }
-    }
-
-    // Listen for hash changes (browser back/forward)
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1);
+    // Helper function to sync modal state with URL hash
+    const syncGameFromHash = () => {
+      const hash = window.location.hash.slice(1); // Remove the '#'
       if (hash) {
         const game = games.find((g) => g.id === hash);
         if (game) {
@@ -117,8 +108,12 @@ export default function Page() {
       }
     };
 
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+    // Open game from URL hash on page load
+    syncGameFromHash();
+
+    // Listen for hash changes (browser back/forward)
+    window.addEventListener("hashchange", syncGameFromHash);
+    return () => window.removeEventListener("hashchange", syncGameFromHash);
   }, [hydrated, games]);
 
   const filtered = useMemo(() => {
@@ -301,7 +296,7 @@ export default function Page() {
           game={selected}
           onClose={() => {
             setSelected(null);
-            window.history.pushState(null, "", window.location.pathname);
+            window.history.replaceState(null, "", window.location.pathname);
           }}
           pegiLabel={t.pegi}
           closeLabel={t.close}
