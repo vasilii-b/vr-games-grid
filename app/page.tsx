@@ -91,6 +91,36 @@ export default function Page() {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Game | null>(null);
 
+  // Handle URL hash for deep linking to game modals
+  useEffect(() => {
+    if (!hydrated) return;
+
+    // Open game from URL hash on page load
+    const hash = window.location.hash.slice(1); // Remove the '#'
+    if (hash) {
+      const game = games.find((g) => g.id === hash);
+      if (game) {
+        setSelected(game);
+      }
+    }
+
+    // Listen for hash changes (browser back/forward)
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        const game = games.find((g) => g.id === hash);
+        if (game) {
+          setSelected(game);
+        }
+      } else {
+        setSelected(null);
+      }
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, [hydrated, games]);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
 
@@ -254,7 +284,10 @@ export default function Page() {
                 <GameCard
                   key={g.id}
                   game={g}
-                  onClick={() => setSelected(g)}
+                  onClick={() => {
+                    setSelected(g);
+                    window.history.pushState(null, "", `#${g.id}`);
+                  }}
                   lang={lang}
                 />
               ))}
@@ -266,7 +299,10 @@ export default function Page() {
       {selected && (
         <GameModal
           game={selected}
-          onClose={() => setSelected(null)}
+          onClose={() => {
+            setSelected(null);
+            window.history.pushState(null, "", window.location.pathname);
+          }}
           pegiLabel={t.pegi}
           closeLabel={t.close}
         />
