@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { isMobileDevice } from "@/lib/utils";
 
 interface VideoPlayerProps {
 	src: string;
@@ -12,11 +13,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
 		if (!video) return;
 
 		// Detect if the device is mobile
-		const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-			navigator.userAgent
-		);
-
-		if (!isMobile) return;
+		if (!isMobileDevice()) return;
 
 		const requestFullscreen = async () => {
 			try {
